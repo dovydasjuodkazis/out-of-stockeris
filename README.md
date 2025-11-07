@@ -35,8 +35,6 @@ Used Claude for code suggestions and type generation for other parts.
 
 ## Demo
 
-<iframe src="https://drive.google.com/file/d/1_QbYZCGevos8OZDJW91QNmB6K89Lshe3/preview" width="100%" height="500" allow="autoplay"></iframe>
-
 https://drive.google.com/file/d/1_QbYZCGevos8OZDJW91QNmB6K89Lshe3/preview
 
 If you can't preview the demo, there's `demo.mp4` file in the root directory (too large to preview in github).
