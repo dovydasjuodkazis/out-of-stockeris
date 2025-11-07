@@ -1,0 +1,25 @@
+# Essential Apps Dev Task
+
+### Tech Thingies
+- Shopify CLI
+- React Router v7 framewok
+- React + Polaris web components for UI (not the polaris-react, it's deprecated)
+- TypeScript for having type safety
+
+### How to run
+1. Go to app directory `cd /out-of-stockeris`
+2. run `npm install` to install dependencies
+3. run `shopify app dev` to start a development server
+
+### How was the task
+Initiated the scaffold app using `shopify app init` command, connected my Shopify Partner Account, 
+created a test dev store with generated products. No additional libraries installed to do the task 
+(all there was within the scaffold). Removed some template files (not all of them, this might need a 
+proper cleanup before use). Tried out Shopify Graphql to see how to query products and its details. 
+Later transferred the query to api.products.tsx which acts as the endpoint to get inventory stock. Spent
+some time playing around w/ Polaris web components, seeing on how the properties work, different tables,
+etc. Finally to make everything more modular and scalable separated utils, queries, types and constants 
+into separate directories. All the authentication stuff to Shopify itself seemed to work from the scaffold,
+no additional changes made. All in all it was quite challenging having no prior experience with developing
+Shopify app itself, it required quite some digging in the docs but nonetheless an exiting task to learn.
+
