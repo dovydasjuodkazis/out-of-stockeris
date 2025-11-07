@@ -1,6 +1,6 @@
 import type { LoaderFunctionArgs } from "react-router";
 import { authenticate } from "../shopify.server";
-import { ProductsGraphQLResponse } from "../types/product.types";
+import type { GetProductsWithInventoryQuery, GetProductsWithInventoryQueryVariables } from "../types/admin.generated";
 import { GET_PRODUCTS_WITH_INVENTORY } from "../graphql/queries/products";
 import { LOW_STOCK_THRESHOLD, PAGE_SIZE } from "../constants/inventory";
 import { buildInventoryQueryFilter } from "../utils/inventory";
@@ -15,7 +15,9 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
   const queryFilter = buildInventoryQueryFilter(status, LOW_STOCK_THRESHOLD);
 
-  const paginationVars: any = { query: queryFilter || null };
+  const paginationVars: GetProductsWithInventoryQueryVariables = {
+    query: queryFilter || null
+  };
 
   if (direction === "next" && cursor) {
     paginationVars.first = PAGE_SIZE;
@@ -31,15 +33,21 @@ export async function loader({ request }: LoaderFunctionArgs) {
     variables: paginationVars,
   });
 
-  const responseData: ProductsGraphQLResponse = await response.json();
+  const responseData = await response.json();
+  const data = responseData.data as GetProductsWithInventoryQuery;
 
-  const products = responseData.data.products.edges.map(edge => ({
+  const products = data.products.edges.map(edge => ({
     id: edge.node.id,
     title: edge.node.title,
     totalInventory: edge.node.totalInventory,
     featuredImage: edge.node.featuredImage,
     price: edge.node.priceRangeV2.minVariantPrice.amount,
     currencyCode: edge.node.priceRangeV2.minVariantPrice.currencyCode,
+    variants: edge.node.variants.edges.map(v => ({
+      id: v.node.id,
+      title: v.node.title,
+      inventoryQuantity: v.node.inventoryQuantity,
+    })),
   }));
 
   return {
@@ -47,6 +55,6 @@ export async function loader({ request }: LoaderFunctionArgs) {
     products,
     count: products.length,
     filter: status || "all",
-    pageInfo: responseData.data.products.pageInfo,
+    pageInfo: data.products.pageInfo,
   };
 }

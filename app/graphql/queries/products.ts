@@ -1,4 +1,4 @@
-export const GET_PRODUCTS_WITH_INVENTORY = `
+export const GET_PRODUCTS_WITH_INVENTORY = `#graphql
   query GetProductsWithInventory(
     $query: String,
     $first: Int,
@@ -21,6 +21,15 @@ export const GET_PRODUCTS_WITH_INVENTORY = `
             minVariantPrice {
               amount
               currencyCode
+            }
+          }
+          variants(first: 100) {
+            edges {
+              node {
+                id
+                title
+                inventoryQuantity
+              }
             }
           }
         }

@@ -2,12 +2,11 @@
 
 client_id = "9b627c67f41789a27e15a9bc4b78977c"
 name = "Out of Stockeris"
-application_url = "https://example.com"
+application_url = "https://test-1111111111111111111111111111111111711111111111124298.myshopify.com/"
 embedded = true
 
 [build]
 automatically_update_urls_on_dev = true
-include_config_on_deploy = true
 
 [webhooks]
 api_version = "2026-01"
@@ -25,4 +24,4 @@ api_version = "2026-01"
 scopes = "write_products"
 
 [auth]
-redirect_urls = [ "https://example.com/api/auth" ]
+redirect_urls = [ "https://test-1111111111111111111111111111111111711111111111124298.myshopify.com/api/auth" ]

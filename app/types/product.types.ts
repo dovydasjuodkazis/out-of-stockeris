@@ -10,6 +10,12 @@ export interface PageInfo {
   endCursor: string;
 }
 
+export interface Variant {
+  id: string;
+  title: string;
+  inventoryQuantity: number;
+}
+
 export interface Product {
   id: string;
   title: string;
@@ -17,6 +23,7 @@ export interface Product {
   featuredImage: FeaturedImage | null;
   price: string;
   currencyCode: string;
+  variants: Variant[];
 }
 
 export interface ShopifyProduct {

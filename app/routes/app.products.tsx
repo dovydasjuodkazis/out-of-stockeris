@@ -1,7 +1,7 @@
-import { useEffect, useState, useRef } from "react";
-import { Product, PageInfo, ProductsApiResponse } from "../types/product.types";
+import {useEffect, useState, useRef} from "react";
+import {Product, PageInfo, ProductsApiResponse} from "../types/product.types";
 import {ProductStockFilterType, ProductStockFilter, DirectionType} from "../types/filters.types";
-import { getStockStatus } from "../utils/inventory";
+import {getStockStatus} from "../utils/inventory";
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -85,29 +85,29 @@ export default function ProductsPage() {
           hasNextPage={pageInfo.hasNextPage}
           hasPreviousPage={pageInfo.hasPreviousPage}
         >
-            <s-stack slot="filters" direction="inline" gap="small">
-              <s-clickable-chip
-                onClick={() => setFilter(ProductStockFilterType.ALL)}
-                pressed={filter === ProductStockFilterType.ALL}
-                color={filter === ProductStockFilterType.ALL ? "subdued" : "base"}
-              >
-                All Products
-              </s-clickable-chip>
-              <s-clickable-chip
-                onClick={() => setFilter(ProductStockFilterType.LOW)}
-                pressed={filter === ProductStockFilterType.LOW}
-                color={filter === ProductStockFilterType.LOW ? "subdued" : "base"}
-              >
-                Low Stock
-              </s-clickable-chip>
-              <s-clickable-chip
-                onClick={() => setFilter(ProductStockFilterType.OUT)}
-                pressed={filter === ProductStockFilterType.OUT}
-                color={filter === ProductStockFilterType.OUT ? "subdued" : "base"}
-              >
-                Out of Stock
-              </s-clickable-chip>
-            </s-stack>
+          <s-stack slot="filters" direction="inline" gap="small">
+            <s-clickable-chip
+              onClick={() => setFilter(ProductStockFilterType.ALL)}
+              pressed={filter === ProductStockFilterType.ALL}
+              color={filter === ProductStockFilterType.ALL ? "subdued" : "base"}
+            >
+              All Products
+            </s-clickable-chip>
+            <s-clickable-chip
+              onClick={() => setFilter(ProductStockFilterType.LOW)}
+              pressed={filter === ProductStockFilterType.LOW}
+              color={filter === ProductStockFilterType.LOW ? "subdued" : "base"}
+            >
+              Low Stock
+            </s-clickable-chip>
+            <s-clickable-chip
+              onClick={() => setFilter(ProductStockFilterType.OUT)}
+              pressed={filter === ProductStockFilterType.OUT}
+              color={filter === ProductStockFilterType.OUT ? "subdued" : "base"}
+            >
+              Out of Stock
+            </s-clickable-chip>
+          </s-stack>
 
 
           <s-table-header-row>
@@ -116,6 +116,7 @@ export default function ProductsPage() {
             <s-table-header format="numeric">Price</s-table-header>
             <s-table-header format="numeric">Total Inventory</s-table-header>
             <s-table-header>Status</s-table-header>
+            <s-table-header>Variants</s-table-header>
           </s-table-header-row>
 
           <s-table-body>
@@ -140,7 +141,7 @@ export default function ProductsPage() {
                         size="small"
                       />
                     ) : (
-                      <s-thumbnail size="small" />
+                      <s-thumbnail size="small"/>
                     )}
                   </s-table-cell>
 
@@ -162,6 +163,16 @@ export default function ProductsPage() {
                     <s-badge tone={getStockStatus(product.totalInventory).tone}>
                       {getStockStatus(product.totalInventory).status}
                     </s-badge>
+                  </s-table-cell>
+
+                  {/* I generated this part with claude code ai */}
+                  <s-table-cell>
+                    <s-tooltip id={`variants-${product.id}`}>
+                      {product.variants.map((variant, index) => (
+                        `${variant.title}: ${variant.inventoryQuantity}${index < product.variants.length - 1 ? '\n' : ''}`
+                      )).join('')}
+                    </s-tooltip>
+                    <s-icon interestFor={`variants-${product.id}`} type="question-circle" color="subdued"/>
                   </s-table-cell>
                 </s-table-row>
               ))
