@@ -34,4 +34,9 @@ Used Claude for code suggestions and type generation for other parts.
 - Installed via dev dashboard
 
 ## Demo
-Demonstartion video can be found in the root directory, demo.png (unable to preview in git due to larger file size).
+
+<iframe src="https://drive.google.com/file/d/1_QbYZCGevos8OZDJW91QNmB6K89Lshe3/preview" width="100%" height="500" allow="autoplay"></iframe>
+
+https://drive.google.com/file/d/1_QbYZCGevos8OZDJW91QNmB6K89Lshe3/preview
+
+If you can't preview the demo, there's `demo.mp4` file in the root directory (too large to preview in github).
