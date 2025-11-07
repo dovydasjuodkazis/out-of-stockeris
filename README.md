@@ -30,10 +30,8 @@ still used some interfaces I wrote myself.
 Used Claude for code suggestions and type generation for other parts.
 
 ### Deployment
-Ran `shopify app deploy`
-Installed via dev dashboard
+- Ran `shopify app deploy`
+- Installed via dev dashboard
 
 ## Demo
-<video width="100%" controls>
-  <source src="demo.mp4" type="video/mp4">
-</video>
+Demonstartion video can be found in the root directory, demo.png (unable to preview in git due to larger file size).
